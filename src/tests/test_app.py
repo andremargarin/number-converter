@@ -9,10 +9,18 @@ def client():
     return app.test_client()
 
 
-def test_response_ok(client):
-    response = client.get('/')
+def test_response_success(client):
+    response = client.get('/0')
     expected_response = {
-        'input': 'not implemented',
-        'output': 'not implemented'
+        'input': '0',
+        'output': 'zero'
+    }
+    assert json.loads(response.data) == expected_response
+
+
+def test_response_error(client):
+    response = client.get('/1000000')
+    expected_response = {
+        "message": "Number out of range"
     }
     assert json.loads(response.data) == expected_response
