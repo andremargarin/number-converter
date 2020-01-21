@@ -20,6 +20,8 @@ class Converter:
         'seicentos', 'setecentos', 'oitocentos', 'novecentos',
     ]
 
+    negative_word = 'menos'
+
     def __init__(self, **kwargs):
         self.low_numbers = {k:v for k,v in zip(range(0, 20), self.low_numbers)}
         self.middle_numbers = {k:v for k,v in zip(range(2, 10), self.middle_numbers)}
@@ -50,9 +52,9 @@ class Converter:
         return (string[0+i:length+i] for i in range(0, len(string), length))
 
     def translate(self, number):
-        signal = ''
+        is_negative = False
         if number < 0:
-            signal = 'menos '
+            is_negative = True
             number = abs(number)
 
         self.validate(number)
@@ -67,23 +69,25 @@ class Converter:
 
         output = ''
         if len(parts) == 2:
-            translate_1 = self.translate_part(parts[0], int(parts[0]))
-            translate_2 = self.translate_part(parts[1], int(parts[1]))
+            hundreds_scale = self.translate_part(parts[0], int(parts[0]))
+            thousands_scale = self.translate_part(parts[1], int(parts[1]))
 
-            if translate_2 != '':
-                if translate_1 == 'um':
-                    output +=  f'mil e {translate_2}'
+            if thousands_scale != '':
+                if hundreds_scale == 'um':
+                    output =  f'mil e {thousands_scale}'
                 else:
-                    output +=  f'{translate_1} mil e {translate_2}'
+                    output =  f'{hundreds_scale} mil e {thousands_scale}'
             else:
-                if translate_1 == 'um':
-                    output +=  f'mil'
+                if hundreds_scale == 'um':
+                    output =  f'mil'
                 else:
-                    output +=  f'{translate_1} mil'
+                    output =  f'{hundreds_scale} mil'
         else:
-            translate = self.translate_part(parts[0], int(parts[0]))
-            output += f'{signal}{translate}'
+            hundreds_scale = self.translate_part(parts[0], int(parts[0]))
+            output = f'{hundreds_scale}'
 
+        if is_negative:
+            return f'{self.negative_word} {output}'
         return output
 
     def validate(self, number):
