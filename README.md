@@ -1,6 +1,9 @@
 # number-converter
 Converts numbers to words. (sample project, for study purposes only)
 
+[![CircleCI - Dev](https://circleci.com/gh/andremargarin/number-converter/tree/dev.svg?style=svg)
+[![CircleCI - Master](https://circleci.com/gh/andremargarin/number-converter/tree/master.svg?style=svg)
+
 ## Build and run using docker
 
 ### Build

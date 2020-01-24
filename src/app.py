@@ -16,8 +16,7 @@ class ConverterResource(Resource):
             abort(400, str(error))
 
         return {
-            'input': number,
-            'output': output
+            'extenso': output
         }
 
 api.add_resource(ConverterResource, '/<number>')

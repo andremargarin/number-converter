@@ -40,8 +40,13 @@ class Converter:
 
         if c != 0:
             output.append(self.high_numbers[c])
-        if d != 0:
-            output.append(self.middle_numbers[d])
+
+        du = int(string[1:])
+        if du < 20:
+            output.append(self.low_numbers[du])
+        else:
+            if d != 0:
+                output.append(self.middle_numbers[d])
             if u != 0:
                 output.append(self.low_numbers[u])
 

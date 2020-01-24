@@ -12,8 +12,7 @@ def client():
 def test_response_success(client):
     response = client.get('/0')
     expected_response = {
-        'input': '0',
-        'output': 'zero'
+        'extenso': 'zero'
     }
     assert json.loads(response.data) == expected_response
 

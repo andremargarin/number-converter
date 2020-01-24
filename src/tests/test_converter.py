@@ -26,9 +26,11 @@ class TestConverter(unittest.TestCase):
 
     def test_high_numbers(self):
         self.assertEqual(self.converter.translate(2000), 'dois mil')
-        self.assertEqual(self.converter.translate(10000), 'dez mil')
-        self.assertEqual(self.converter.translate(1234), 'mil e duzentos e trinta e quatro')
-        self.assertEqual(self.converter.translate(12345), 'doze mil e trezentos e quarenta e cinco')
+        self.assertEqual(self.converter.translate(2001), 'dois mil e um')
+        self.assertEqual(self.converter.translate(2022), 'dois mil e vinte e dois')
+        self.assertEqual(self.converter.translate(2111), 'dois mil e cento e onze')
+        self.assertEqual(self.converter.translate(40404), 'quarenta mil e quatrocentos e quatro')
+        self.assertEqual(self.converter.translate(22222), 'vinte e dois mil e duzentos e vinte e dois')
 
     def test_edge_cases(self):
         self.assertEqual(self.converter.translate(0), 'zero')
